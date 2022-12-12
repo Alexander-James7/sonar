@@ -1,13 +1,10 @@
+let strip: neopixel.Strip = null
 let distance_to_object = 0
-basic.showIcon(IconNames.Yes)
-basic.pause(500)
-let strip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
-strip.clear()
-strip.show()
 basic.forever(function () {
+    strip = neopixel.create(DigitalPin.P16, 4, NeoPixelMode.RGB)
     distance_to_object = sonar.ping(
-    DigitalPin.P12,
-    DigitalPin.P13,
+    DigitalPin.P1,
+    DigitalPin.P2,
     PingUnit.Centimeters
     )
     basic.showNumber(distance_to_object)
@@ -15,13 +12,25 @@ basic.forever(function () {
         strip.showColor(neopixel.colors(NeoPixelColors.Green))
         strip.show()
         strip.clear()
-    }
-    if (distance_to_object <= 4) {
-        strip.setPixelColor(distance_to_object, neopixel.colors(NeoPixelColors.Blue))
+    } else if (distance_to_object == 4) {
+        strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Blue))
+        strip.setPixelColor(1, neopixel.colors(NeoPixelColors.Blue))
+        strip.setPixelColor(2, neopixel.colors(NeoPixelColors.Blue))
+        strip.setPixelColor(3, neopixel.colors(NeoPixelColors.Blue))
         strip.show()
         strip.clear()
-    }
-    if (distance_to_object <= 1) {
+    } else if (distance_to_object == 3) {
+        strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Blue))
+        strip.setPixelColor(1, neopixel.colors(NeoPixelColors.Blue))
+        strip.setPixelColor(2, neopixel.colors(NeoPixelColors.Blue))
+        strip.show()
+        strip.clear()
+    } else if (distance_to_object == 2) {
+        strip.setPixelColor(0, neopixel.colors(NeoPixelColors.Blue))
+        strip.setPixelColor(1, neopixel.colors(NeoPixelColors.Blue))
+        strip.show()
+        strip.clear()
+    } else {
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
         strip.show()
         strip.clear()
